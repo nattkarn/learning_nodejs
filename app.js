@@ -1,29 +1,34 @@
-// ===> node js 
-// const HTTP = require('http')
-// const PORT = 3000
-
-// const app = HTTP.createServer((request, response) => {
-//   response.statusCode = 200
-//   response.setHeader = ('Content0Type', 'text/pain')
-//   response.end('Hello World')
-// })
-
-// app.listen(PORT, () => {
-//   console.log(`server is running on http://localhost:${PORT}`)
-// })
-
-
 // ===> express
-const express = require('express')
-const app = express()
+import express from "express";
+import promBundle from "express-prom-bundle";
 
-app.get('/', (request , response) => {
-  response.status(200).json({
-    'aa':'aa'
-  })
-})
+import AppRouter from "./src/app.route.js";
 
-const PORT = 3000
+const app = express();
+
+const metricsMiddleware = promBundle({ includeMethod: true });
+app.use(metricsMiddleware);
+
+//TODO : explain
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(AppRouter)
+
+
+
+const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`server is running on http://localhost:${PORT}`)
-})
+  console.log(`server is running on http://localhost:${PORT}`);
+});
+
+//GET Method
+app.get("/status", (req, res) => {
+  res.status(200).json({
+    success: true,
+    data: {
+      timestamp: new Date(),
+    },
+  });
+});
+
