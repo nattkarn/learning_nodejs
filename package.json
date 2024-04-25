@@ -9,9 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.19.2",
     "express-prom-bundle": "^7.0.0",
+    "humps": "^2.0.1",
     "prom-client": "^15.1.2"
   },
   "description": "",
