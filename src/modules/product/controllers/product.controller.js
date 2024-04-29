@@ -19,14 +19,28 @@ const productController = {
   updateProduct: (req, res) => {
     const { id } = req.params;
     const { title } = req.body;
+    const { description } = req.body
+    const { price } = req.body
     const productIndex = products.findIndex((product) => product.id == id);
     const results = products;
-    results[productIndex] = { ...results[productIndex], title };
+    results[productIndex] = { ...results[productIndex], title , description, price};
     res.status(201).json({
       success: true,
       data: {
         timestamp: new Date(),
         result: results,
+      },
+    });
+  },
+  deleteProduct: (req, res) => {
+    const { id } = req.params;
+    const productIndex = products.findIndex((product) => product.id == id);
+    
+    res.status(201).json({
+      success: true,
+      data: {
+        timestamp: new Date(),
+        result: productIndex,
       },
     });
   },
