@@ -2,7 +2,7 @@
 import express from "express";
 import AppRouter from "./src/app.route.js";
 import AppMiddleWare from "./src/app.middleware.js";
-
+import AppConfig from "./src/app.config.js"
 
 const app = express();
 
@@ -16,7 +16,7 @@ const ascii = `
             |_|                           
 --------------------------------------------        
 `
-
+app.use(AppConfig)
 app.use(AppRouter)
 app.use(AppMiddleWare)
 
