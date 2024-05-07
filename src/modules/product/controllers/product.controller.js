@@ -10,8 +10,8 @@ const productController = {
       timestamp: new Date(),
       data: {
         result: product,
-      }
-    })
+      },
+    });
   },
   getProductById: async (req, res) => {
     const { id } = req.params;
@@ -21,8 +21,8 @@ const productController = {
       timestamp: new Date(),
       data: {
         result: product,
-      }
-    })
+      },
+    });
   },
   findTitleProduct: async (req, res) => {
     const { title } = req.body;
@@ -34,8 +34,8 @@ const productController = {
       timestamp: new Date(),
       data: {
         result: product,
-      }
-    })
+      },
+    });
   },
   addProduct: async (req, res) => {
     const { title, description, price } = req.body;
@@ -48,36 +48,36 @@ const productController = {
       },
     });
   },
-  updateProduct: (req, res) => {
+  updateProduct: async (req, res) => {
     const { id } = req.params;
-    const { title } = req.body;
-    const { description } = req.body;
-    const { price } = req.body;
-    const productIndex = products.findIndex((product) => product.id == id);
-    const results = products;
-    results[productIndex] = {
-      ...results[productIndex],
+    const { title, description, price } = req.body;
+    const filter = { _id: id };
+    const updated = await ProductService.updateOne(filter, {
       title,
       description,
       price,
-    };
+    });
+    console.log("Before Update:", updated);
+    const product = await ProductService.getOne(id);
+    console.log("Updated:", product);
     res.status(201).json({
       success: true,
       timestamp: new Date(),
       data: {
-        result: results,
+        result: product,
       },
     });
   },
-  deleteProduct: (req, res) => {
+  //Not recommend to do this
+  deleteProduct: async(req, res) => {
     const { id } = req.params;
-    const productIndex = products.findIndex((product) => product.id == id);
-    const delProduct = ProductService.delProduct(id)
-    res.status(201).json({
+    const filter = { _id: id}
+    const delProduct = await ProductService.delProduct(filter);
+    res.status(200).json({
       success: true,
       timestamp: new Date(),
       data: {
-        result: productIndex,
+        result: delProduct,
       },
     });
   },

@@ -14,7 +14,7 @@ productRouter.get("/", productController.getProduct)
 productRouter.get("/:id", productController.getProductById)
 productRouter.post("/title", validator.body(FindByTitleProductValidator), productController.findTitleProduct)
 productRouter.post("/add", validator.body(CreateProductValidator), productController.addProduct) 
-productRouter.patch("update/:id", validator.body(UpdateProductValidator), productController.updateProduct)
-productRouter.delete("delete/:id", productController.deleteProduct)
+productRouter.patch("/update/:id", validator.body(UpdateProductValidator), productController.updateProduct)
+productRouter.delete("/delete/:id", productController.deleteProduct)
 
 export default productRouter;

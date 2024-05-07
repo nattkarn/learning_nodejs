@@ -13,8 +13,11 @@ const ProductService = {
   findProduct: ({title}) => {
     return ProductModel.find({ title })
   },
+  updateOne: (id, payload) => {
+    return ProductModel.findOneAndUpdate(id, {$set:payload})
+  },
   delProduct: (id) =>{
-    return ProductModel.deleteOne(id)
+    return ProductModel.findByIdAndDelete(id)
   }
 };
 
