@@ -4,21 +4,21 @@ const ProductService = {
   create: (payload) => {
     return new ProductModel(payload).save();
   },
-  getAll: () =>{
-    return ProductModel.find()
+  getAll: () => {
+    return ProductModel.find();
   },
   getOne: (id) => {
-    return ProductModel.findById(id)
+    return ProductModel.findById(id);
   },
-  findProduct: ({title}) => {
-    return ProductModel.find({ title })
+  findProduct: ({ title }) => {
+    return ProductModel.find({ title });
   },
   updateOne: (id, payload) => {
-    return ProductModel.findOneAndUpdate(id, {$set:payload})
+    return ProductModel.findOneAndUpdate(id, { $set: payload });
   },
-  delProduct: (id) =>{
-    return ProductModel.findByIdAndDelete(id)
-  }
+  หำ: (id) => {
+    return ProductModel.findByIdAndDelete(id);
+  },
 };
 
 export default ProductService;
