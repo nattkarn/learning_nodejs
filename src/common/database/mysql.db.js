@@ -16,7 +16,7 @@ db.connect((error) => {
     return;
   }
   console.log(`MySQL connected as id:${db.threadId}`);
-});
+});  
 
 export const doQuery = (sql, options) => {
   return new Promise((resolve, reject) => {
